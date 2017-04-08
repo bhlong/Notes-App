@@ -34,11 +34,20 @@ var getAll = () => {
 };
 
 var getNote = (title) => {
-    console.log('getting note:', title);
+    var notes = fetchNotes();
+    var duplicateNotes = notes.filter((note) => note.title === title);
+    return duplicateNotes[0];
 };
 
 var removeNote = (title) => {
-    console.log('removing note:', title);
+    // fetch data
+    var notes = fetchNotes();
+    // filter notes, remove the one with the title title
+    var duplicateNotes = notes.filter((note) => note.title !== title);
+    // save new notes array
+    saveNotes(duplicateNotes);
+
+    return notes.length !== duplicateNotes.length;
 };
 
 module.exports = {
